@@ -53,7 +53,7 @@
 		? 'translate-x-0'
 		: 'translate-x-full'}"
 >
-	<div class="flex flex-grow items-center justify-center">
+	<div class="flex flex-grow items-center p-8">
 		<nav>
 			<ul class="py-4 text-4xl">
 				{#each navItems as { path, label }}
