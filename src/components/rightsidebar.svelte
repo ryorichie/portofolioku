@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { NavItem, SocialLink } from './types';
+	import type { NavItem, SocialLink } from '../lib/types';
 	import Icon from '@iconify/svelte';
 
 	let isNavOpen = $state(true);
@@ -40,7 +39,7 @@
 
 <button
 	class="absolute right-4 top-4 z-10 p-2 text-gray-500 transition-colors duration-200 hover:text-white"
-	on:click={() => (isNavOpen = !isNavOpen)}
+	onclick={() => (isNavOpen = !isNavOpen)}
 >
 	{#if isNavOpen}
 		<Icon icon="mdi:close" width="32" />
@@ -49,20 +48,22 @@
 	{/if}
 </button>
 <nav
-	class="fixed right-0 top-0 flex h-screen w-full transform flex-col bg-gray-800 p-4 text-white transition-all duration-300 sm:w-3/5 md:w-1/2 lg:w-[30%] xl:w-[25%] 2xl:w-[20%] {isNavOpen
+	class="fixed right-0 top-0 flex h-screen w-full transform flex-col overflow-hidden text-white transition-all duration-300 sm:w-1/2 md:w-2/5 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] {isNavOpen
 		? 'translate-x-0'
 		: 'translate-x-full'}"
 >
-	<div class="flex flex-grow items-center p-8">
-		<nav>
-			<ul class="py-4 text-4xl">
-				{#each navItems as { path, label }}
-					<li class="py-4 duration-300 hover:scale-125 hover:text-gray-300">
-						<a href={path}>{label}</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
+	<div class="flex h-screen w-full flex-grow items-center">
+		<ul class="m-0 w-full p-0 text-4xl">
+			{#each navItems as { path, label }}
+				<li class="group w-full rounded-3xl">
+					<a
+						href={path}
+						class="block w-full p-8 py-8 pr-14 text-right transition-transform duration-200 group-hover:scale-125"
+						>{label}</a
+					>
+				</li>
+			{/each}
+		</ul>
 	</div>
 	<div title="logo" class="mt-auto flex justify-around">
 		{#each socialLinks as { url, alt, icon }}
